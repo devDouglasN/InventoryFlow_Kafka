@@ -22,7 +22,7 @@ public class StockConsumerService {
     @KafkaListener(topics = "${topic.name}", groupId = "${spring.kafka.group-id}",
             containerFactory = "stockKafkaListenerContainerFactory")
     public void listenTopicStock(ConsumerRecord<String, StockDTO> record) {
-        log.info("Received Message" + record.partition());
-        log.info("Received Message" + record.value());
+        log.info("Received Message " + record.partition());
+        log.info("Received Message: " + record.value());
     }
 }
