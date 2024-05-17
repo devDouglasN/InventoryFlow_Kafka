@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
 
 @Service
 public class StockProducerService {
@@ -23,16 +24,15 @@ public class StockProducerService {
     }
 
     public void send(StockDTO stockDTO) {
-        ListenableFuture<SendResult<String, StockDTO>> future = (ListenableFuture<SendResult<String, StockDTO>>) kafkaTemplate.send(topic, stockDTO);
-        future.addCallback(new ListenableFutureCallback<SendResult<String, StockDTO>>() {
+        CompletableFuture<SendResult<String, StockDTO>> future = kafkaTemplate.send(topic, stockDTO);
+        future.whenComplete(new BiConsumer<SendResult<String, StockDTO>, Throwable>() {
             @Override
-            public void onSuccess(SendResult<String, StockDTO> result) {
-                logger.info("Message send" + result.getProducerRecord().value());
-            }
-
-            @Override
-            public void onFailure(Throwable ex) {
-                logger.info("Message failure" + ex.getMessage());
+            public void accept(SendResult<String, StockDTO> result, Throwable ex) {
+                if (ex != null) {
+                    logger.error("Message failure: " + ex.getMessage());
+                } else {
+                    logger.info("Message sent: " + result.getProducerRecord().value());
+                }
             }
         });
     }
