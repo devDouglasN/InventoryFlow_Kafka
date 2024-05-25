@@ -1,6 +1,6 @@
 {
     "type": "record",
-    "name": "Peoples",
+    "name": "Stock",
     "namespace": "com.douglas.springkafka",
     "fields": [
         {
@@ -8,19 +8,16 @@
             "type": "string"
         },
         {
-            "name": "name",
+            "name": "person",
+            "type": "Peoples"
+        },
+        {
+            "name": "stockItem",
             "type": "string"
         },
         {
-            "name": "cpf",
-            "type": "string"
-        },
-        {
-            "name": "books",
-            "type": {
-                "type": "array",
-                "items": "string"
-            }
+            "name": "quantity",
+            "type": "int"
         }
     ]
 }
