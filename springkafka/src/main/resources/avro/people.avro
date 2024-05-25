@@ -1,0 +1,26 @@
+{
+    "type": "record",
+    "name": "Peoples",
+    "namespace": "com.douglas.springkafka",
+    "fields": [
+        {
+            "name": "id",
+            "type": "string"
+        },
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "cpf",
+            "type": "string"
+        },
+        {
+            "name": "books",
+            "type": {
+                "type": "array",
+                "items": "string"
+            }
+        }
+    ]
+}
