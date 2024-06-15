@@ -12,5 +12,5 @@ public class Stock {
     private Integer quantity;
 
     @ManyToOne
-    private Person person;
+    private People person;
 }
