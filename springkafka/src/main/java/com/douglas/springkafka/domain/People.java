@@ -1,13 +1,16 @@
 package com.douglas.springkafka.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
 public class People {
 
@@ -18,6 +21,6 @@ public class People {
     private String name;
     private String cpf;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "people", cascade = CascadeType.ALL)
     private List<Stock> stocks;
 }
