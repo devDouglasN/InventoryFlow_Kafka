@@ -30,7 +30,7 @@ public class PeopleController {
                 .setId(id)
                 .setName(peopleDTO.name())
                 .setCpf(peopleDTO.cpf())
-                .setBooks(peopleDTO.books().stream().map(p -> (CharSequence) p).collect(Collectors.toList()))
+                .setBooks(peopleDTO.stocks().stream().map(p -> (CharSequence) p).collect(Collectors.toList()))
                 .build();
 
         peopleProducer.sendMessage(message);

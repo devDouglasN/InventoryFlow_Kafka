@@ -7,7 +7,7 @@ public record PeopleDTO(
         String name,
         String cpf,
 
-        List<String> books
+        List<String> stocks
 
     ) {
 }
